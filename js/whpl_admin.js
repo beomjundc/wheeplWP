@@ -40,6 +40,9 @@ function errorHandler (jqXHR, textStatus, errorThrown) {
         console.log(jqXHR.responseJSON.error);
         console.log("-----------------");
     }
+
+    // error alert handler
+    errorAlert(jqXHR.responseJSON.error);
 }
 
 /*** CALLBACK FUNCTION: SAVE ANON TOKEN ***/
@@ -108,4 +111,31 @@ function whplAjax (requestType, endPoint, successHandler, errorHandler, data)
         success: successHandler,
         error: errorHandler
     });
+}
+
+/*** FUNCTION: ERROR ALERT ***/
+function errorAlert (msg) {
+    if (msg == "user is not an admin") {
+        var alertMsg = "user is not an admin.";
+
+        $('.error-msg').empty();
+        $('.error-msg').append(alertMsg);
+    }
+    else if (msg == "username or password not valid") {
+        var alertMsg = "<strong>username</strong> or <strong>password</strong> is not valid.";
+
+        $('.error-msg').empty();
+        $('.error-msg').append(alertMsg);
+    }
+    else if (msg == "siteRef or siteKey not valid") {
+        var alertMsg = "<strong>site reference</strong> or <strong>site key</strong> is not valid.";
+
+        $('.error-msg').empty();
+        $('.error-msg').append(alertMsg);
+    }
+    else if (msg == "incorrect siteKey") {
+        var alertMsg = "the sitekey is incorrect.";
+
+        $('.error-msg').empty();
+        $('.error-msg').append(alertMsg);
 }

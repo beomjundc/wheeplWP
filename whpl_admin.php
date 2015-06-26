@@ -16,6 +16,8 @@
         <p><?php _e( 'site key (provided to you upon admin activation): ' ); ?></p>
         <p><input type="text" name="siteKey" value="<?php echo $site_key; ?>" size="30"></p>
 
+        <p class="error-msg" style="color:#ff6057;"></p>
+
         <p class="submit">
             <input id="adminSubmit" type="button" name="submit" value="<?php _e( 'submit' ) ?>" />
         </p>
