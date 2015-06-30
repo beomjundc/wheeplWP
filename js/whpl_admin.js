@@ -138,4 +138,5 @@ function errorAlert (msg) {
 
         $('.error-msg').empty();
         $('.error-msg').append(alertMsg);
+    }
 }
