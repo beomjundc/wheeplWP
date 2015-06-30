@@ -134,7 +134,7 @@ function errorAlert (msg) {
         jQuery('.error-msg').append(alertMsg);
     }
     else if (msg == "incorrect siteKey") {
-        var alertMsg = "the sitekey is incorrect.";
+        var alertMsg = "sitekey is incorrect.";
 
         jQuery('.error-msg').empty();
         jQuery('.error-msg').append(alertMsg);
