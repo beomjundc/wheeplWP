@@ -14,7 +14,7 @@ define('wheepl_version', '1.0');
 if (get_option('whpl_siteRef')) {
     // add wheepl widget where the comments should be
     function whpl_widget () {
-        return plugin_dir_path(__FILE__) . '/whpl_widget.php';
+        return plugin_dir_path(__FILE__) . '/whpl-widget.php';
     }
 
     add_filter('comments_template', 'whpl_widget');
@@ -35,7 +35,7 @@ if (get_option('whpl_siteRef')) {
 
     // add ajax js file to communicate with wheepl api server
     function whpl_retrieve_counter ($post) {
-        wp_enqueue_script('whpl-counter-script', plugins_url('/js/whpl_counter.js', __FILE__), array('jquery'));
+        wp_enqueue_script('whpl-counter-script', plugins_url('/js/whpl-counter.js', __FILE__), array('jquery'));
 
         // pass parameters to the script
         $params = array('ajaxUrl' => admin_url('admin-counter.php'), 'siteRef' => get_option('whpl_siteRef'));
@@ -50,7 +50,7 @@ if (get_option('whpl_siteRef')) {
 // add wheepl options page to admin management
 if (true == is_admin() && get_option('whpl_siteRef')) {
     function whpl_admin_options () {
-        include('whpl_options.php');
+        include('whpl-options.php');
     }
      
     function whpl_admin_actions () {
@@ -61,7 +61,7 @@ if (true == is_admin() && get_option('whpl_siteRef')) {
 }
 else {
     function whpl_admin_form () {
-        include('whpl_admin.php');
+        include('whpl-admin.php');
     }
      
     function whpl_admin_actions () {
@@ -76,7 +76,7 @@ else {
             return;
         }
         
-        wp_enqueue_script('whpl-admin-script', plugins_url('/js/whpl_admin.js', __FILE__), array('jquery'));
+        wp_enqueue_script('whpl-admin-script', plugins_url('/js/whpl-admin.js', __FILE__), array('jquery'));
 
         // pass parameters to the script
         $params = array('ajaxUrl' => admin_url('admin-ajax.php'));
