@@ -15,7 +15,7 @@
     (function () {
         var whpl = document.createElement('script'); whpl.type = 'text/javascript';
         whpl.async = true;
-        whpl.src = 'http://dev.widget.wheepl.com/js/whpl_embd.js';
+        whpl.src = 'http://dev.widget.wheepl.com/js/whpl_embd.min.js';
         (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(whpl);
     })();
 
