@@ -68,10 +68,10 @@ function wpAjax (requestType, ajaxUrl, successHandler, errorHandler, data)
                 console.log("action: " + data.action);
         },
         success: successHandler,
-        error: errorHandler,
-        function(response){
-            alert('The server responded: ' + response);
-        }
+        error: errorHandler
+        // function(response){
+        //     alert('The server responded: ' + response);
+        // }
     });
 }
 

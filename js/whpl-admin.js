@@ -11,7 +11,7 @@ jQuery(document).ready(function($) {
     $('#adminSubmit').click(function () {
         var formData = {},
             parameters = {"action":"whpl_post_admin",
-                "url":"http://dauph.no-ip.biz:9001/wp-admin/options-general.php?page=wheepl-options",
+                "url":window.location.protocol + "//" + window.location.host + window.location.pathname,
                 "token":anonToken};
 
         $("#adminLoginForm").serializeArray().map(function(x){formData[x.name] = x.value;}); // generate data object by serializing form values
@@ -85,10 +85,10 @@ function wpAjax (requestType, ajaxUrl, successHandler, errorHandler, data)
                 console.log("action: " + data.action);
         },
         success: successHandler,
-        error: errorHandler,
-        function(response){
-            alert('The server responded: ' + response);
-        }
+        error: errorHandler
+        // function(response){
+        //     alert('The server responded: ' + response);
+        // }
     });
 }
 
