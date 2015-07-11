@@ -100,7 +100,7 @@ function whplAjax (requestType, endPoint, successHandler, errorHandler, data)
         url: apiUrl + endPoint,
         contentType: "application/json; charset=utf-8",
         headers: {
-            "Authorization": "Basic " + btoa('username' + ":" + 'password')
+            "Authorization": "Basic " + btoa('3cSDoUbctQrYQTYkBen5idEHyQsJ6FCoZz3ZVGCd' + ":" + 'VHG2cQGmpEh9MsnrqKsPo7pfVxzZeHk43vKMoBoh')
         },
         data: JSON.stringify(data),
         cache: false,
