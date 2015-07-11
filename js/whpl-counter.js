@@ -1,5 +1,5 @@
-var debug = true,
-    apiUrl = "https://dev.api.wheepl.com:5000/api/v1/",
+var debug = false,
+    apiUrl = "https://api.wheepl.com:5000/api/v1/",
     anonToken = "";
 
 jQuery(document).ready(function($) {
