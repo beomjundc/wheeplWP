@@ -11,7 +11,7 @@ jQuery(document).ready(function($) {
     $('#adminSubmit').click(function () {
         var formData = {},
             parameters = {"action":"whpl_post_admin",
-                "url":window.location.protocol + "//" + window.location.host + window.location.pathname,
+                "tld":window.location.host,
                 "token":anonToken};
 
         $("#adminLoginForm").serializeArray().map(function(x){formData[x.name] = x.value;}); // generate data object by serializing form values
