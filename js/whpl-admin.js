@@ -65,7 +65,9 @@ function whplPostAdmin (result, textStatus, jqXHR) {
 
 /*** CALLBACK FUNCTION: RE-DIRECT USER ON SUCCESSFUL POST ***/
 function whplRedirectUrl (result, textStatus, jqXHR) {
-    window.location.href = "/wp-admin/options-general.php";
+    // window.location.href = "/wp-admin/options-general.php";
+
+    window.location.replace(window.location.protocol + "//" + window.location.hostname + window.location.pathname + "?page=wheepl-admin-options")
 
     if (debug == true) {
         console.log("whplRedirectUrl successful");

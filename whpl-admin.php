@@ -12,7 +12,7 @@
         <?php echo "<h4>" . __( 'site information' ) . "</h4>"; ?>
         
         <p><?php _e( 'site reference: ' ); ?></p>
-        <p><input type="text" name="siteRef" value="<?php echo $site_ref; ?>" size="30"><?php _e(" i.e. MyAwesomeBlog" ); ?></p>
+        <p><input type="text" name="siteRef" value="<?php echo $site_ref; ?>" size="30"><?php _e(" i.e. wheepllaboratory" ); ?></p>
         <p><?php _e( 'site key (provided to you upon admin activation): ' ); ?></p>
         <p><input type="text" name="siteKey" value="<?php echo $site_key; ?>" size="30"></p>
 

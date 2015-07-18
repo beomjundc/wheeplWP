@@ -31,7 +31,7 @@ if (get_option('whpl_siteRef')) {
     }
 
     // replace comments text
-    add_filter('comments_number', whpl_msgs_text);
+    add_filter('comments_number', 'whpl_msgs_text');
 
     // add ajax js file to communicate with wheepl api server
     function whpl_retrieve_counter ($post) {
@@ -54,7 +54,7 @@ if (true == is_admin() && get_option('whpl_siteRef')) {
     }
      
     function whpl_admin_actions () {
-        $GLOBALS['whpl_admin_registration'] = add_options_page('wheepl', 'wheepl', 1, 'wheepl-admin-options', 'whpl_admin_options');
+        $GLOBALS['whpl_admin_registration'] = add_options_page('wheepl', 'wheepl', 'manage_options', 'wheepl-admin-options', 'whpl_admin_options');
     }
 
     add_action('admin_menu', 'whpl_admin_actions');
@@ -65,7 +65,7 @@ else {
     }
      
     function whpl_admin_actions () {
-        $GLOBALS['whpl_admin_registration'] = add_options_page('wheepl', 'wheepl', 1, 'wheepl-admin-form', 'whpl_admin_form');
+        $GLOBALS['whpl_admin_registration'] = add_options_page('wheepl', 'wheepl', 'manage_options', 'wheepl-admin-form', 'whpl_admin_form');
     }
 
     add_action('admin_menu', 'whpl_admin_actions');
@@ -96,7 +96,8 @@ else {
         $siteRef = $_POST['siteRef'];
         update_option('whpl_siteRef', strtolower($siteRef));
 
-        wp_die();
+        // wp_die();
+        exit();
     }
 
     add_action('wp_ajax_whpl_post_admin', 'whpl_post_admin_callback'); // Call when user logged in
