@@ -35,7 +35,8 @@ if (get_option('whpl_siteRef')) {
 
     // add ajax js file to communicate with wheepl api server
     function whpl_retrieve_counter ($post) {
-        wp_enqueue_script('whpl-counter-script', plugins_url('/js/whpl-counter.js', __FILE__), array('jquery'));
+        wp_enqueue_script('whpl-conf-script', plugins_url('/js/whpl-conf.js', __FILE__));
+        wp_enqueue_script('whpl-counter-script', plugins_url('/js/whpl-counter.js', __FILE__), array('jquery', 'whpl-conf-script')); // whpl-counter.js has dependency on whpl-conf.js
 
         // pass parameters to the script
         $params = array('ajaxUrl' => admin_url('admin-counter.php'), 'siteRef' => get_option('whpl_siteRef'));
@@ -76,7 +77,8 @@ else {
             return;
         }
         
-        wp_enqueue_script('whpl-admin-script', plugins_url('/js/whpl-admin.js', __FILE__), array('jquery'));
+        wp_enqueue_script('whpl-conf-script', plugins_url('/js/whpl-conf.js', __FILE__));
+        wp_enqueue_script('whpl-admin-script', plugins_url('/js/whpl-admin.js', __FILE__), array('jquery', 'whpl-conf-script')); // whpl-admin.js has dependency on whpl-conf.js
 
         // pass parameters to the script
         $params = array('ajaxUrl' => admin_url('admin-ajax.php'));

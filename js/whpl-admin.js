@@ -1,5 +1,7 @@
-var debug = true,
-    apiUrl = "https://dev.api.wheepl.com:5000/api/v1/",
+var apiUrl = whplConf.apiUrl,
+    debug = whplConf.debug,
+    ajaxUser = whplConf.ajaxUser,
+    ajaxPass = whplConf.ajaxPass
     anonToken = "",
     data = {};
 
@@ -102,7 +104,7 @@ function whplAjax (requestType, endPoint, successHandler, errorHandler, data)
         url: apiUrl + endPoint,
         contentType: "application/json; charset=utf-8",
         headers: {
-            "Authorization": "Basic " + btoa('username' + ":" + 'password')
+            "Authorization": "Basic " + btoa(ajaxUser + ":" + ajaxPass)
         },
         data: JSON.stringify(data),
         cache: false,
