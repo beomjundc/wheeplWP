@@ -4,4 +4,5 @@ var whplConf = {
     debug: true,
     ajaxUser: "username",
     ajaxPass: "password",
+    embedScript: "/js/whpl-embd.js"
 }

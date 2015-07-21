@@ -24,7 +24,7 @@
         var whpl = document.createElement('script');
         whpl.type = 'text/javascript';
         whpl.async = true;
-        whpl.src = whplConf.widgetSrc + "/js/whpl-embd.js";
+        whpl.src = whplConf.widgetSrc + whplConf.embedScript;
 
         (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(whpl);
     })();
