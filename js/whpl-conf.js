@@ -4,5 +4,5 @@ var whplConf = {
     debug: false,
     ajaxUser: "3cSDoUbctQrYQTYkBen5idEHyQsJ6FCoZz3ZVGCd",
     ajaxPass: "VHG2cQGmpEh9MsnrqKsPo7pfVxzZeHk43vKMoBoh",
-    embedScript: "/js/whpl-embd.js"
+    embedScript: "/js/whpl-embd.min.js"
 }
