@@ -6,19 +6,19 @@ var apiUrl = whplConf.apiUrl,
 
 jQuery(document).ready(function($) {
 
-    whplAjax('GET', 'addAnon', whplSaveAnonToken, errorHandler);
+    whplAjax('GET', 'addAnon', whplSaveAnonToken, whplErrorHandler);
 
 });
 
 /*** CALLBACK FUNCTION: DEFAULT SUCCESS HANDLER ***/
-function successHandler (result, textStatus, jqXHR) {
+function whplSuccessHandler (result, textStatus, jqXHR) {
     if (debug == true) {
         console.log("ajax call successful");
     }
 }
 
 /*** CALLBACK FUNCTION: DEFAULT ERROR HANDLER ***/
-function errorHandler (jqXHR, textStatus, errorThrown) {
+function whplErrorHandler (jqXHR, textStatus, errorThrown) {
     if (debug == true) {
         console.log("error in ajax call");
         console.log("-----------------");
@@ -39,7 +39,7 @@ function whplSaveAnonToken (result, textStatus, jqXHR) {
             "token":anonToken
         }
 
-        whplAjax('POST', 'fetchHashtagUrl', whplDisplayCounter, errorHandler, data);
+        whplAjax('POST', 'fetchHashtagUrl', whplDisplayCounter, whplErrorHandler, data);
     });
 
     if (debug == true) {
@@ -58,7 +58,7 @@ function whplDisplayCounter (result, textStatus, jqXHR) {
 }
 
 /*** FUNCTION: WORDPRESS AJAX CALL ***/
-function wpAjax (requestType, ajaxUrl, successHandler, errorHandler, data)
+function wpAjax (requestType, ajaxUrl, whplSuccessHandler, whplErrorHandler, data)
 {
     jQuery.ajax({
         type: requestType,
@@ -69,8 +69,8 @@ function wpAjax (requestType, ajaxUrl, successHandler, errorHandler, data)
             if (debug == true)
                 console.log("action: " + data.action);
         },
-        success: successHandler,
-        error: errorHandler
+        success: whplSuccessHandler,
+        error: whplErrorHandler
         // function(response){
         //     alert('The server responded: ' + response);
         // }
@@ -78,7 +78,7 @@ function wpAjax (requestType, ajaxUrl, successHandler, errorHandler, data)
 }
 
 /*** FUNCTION: WHEEPL AJAX CALL ***/
-function whplAjax (requestType, endPoint, successHandler, errorHandler, data)
+function whplAjax (requestType, endPoint, whplSuccessHandler, whplErrorHandler, data)
 {
     jQuery.ajax({
         type: requestType,
@@ -93,7 +93,7 @@ function whplAjax (requestType, endPoint, successHandler, errorHandler, data)
             if (debug == true)
                 console.log("calling " + endPoint + "...");
         },
-        success: successHandler,
-        error: errorHandler
+        success: whplSuccessHandler,
+        error: whplErrorHandler
     });
 }

@@ -7,33 +7,33 @@ var apiUrl = whplConf.apiUrl,
 
 jQuery(document).ready(function($) {
 
-    whplAjax('GET', 'addAnon', whplSaveAnonToken, errorHandler);
+    whplAjax('GET', 'addAnon', whplSaveAnonToken, whplErrorHandler);
 
     // ON CLICK: login user for admin management
     $('#adminSubmit').click(function () {
         var formData = {},
             parameters = {"action":"whpl_post_admin",
-                "tld":window.location.host,
+                "url":window.location.protocol + "//" + window.location.host + window.location.pathname,
                 "token":anonToken};
 
         $("#adminLoginForm").serializeArray().map(function(x){formData[x.name] = x.value;}); // generate data object by serializing form values
 
         data = $.extend({}, parameters, formData); // add parameters and form data
 
-        whplAjax('POST', 'blogAdminInit', whplPostAdmin, errorHandler, data); // ajax call to post data to wheepl
+        whplAjax('POST', 'blogAdminInit', whplPostAdmin, whplErrorHandler, data); // ajax call to post data to wheepl
     });
 
 });
 
 /*** CALLBACK FUNCTION: DEFAULT SUCCESS HANDLER ***/
-function successHandler (result, textStatus, jqXHR) {
+function whplSuccessHandler (result, textStatus, jqXHR) {
     if (debug == true) {
         console.log("ajax call successful");
     }
 }
 
 /*** CALLBACK FUNCTION: DEFAULT ERROR HANDLER ***/
-function errorHandler (jqXHR, textStatus, errorThrown) {
+function whplErrorHandler (jqXHR, textStatus, errorThrown) {
     if (debug == true) {
         console.log("error in ajax call");
         console.log("-----------------");
@@ -58,7 +58,7 @@ function whplSaveAnonToken (result, textStatus, jqXHR) {
 
 /*** CALLBACK FUNCTION: POST ADMIN DATA TO WORDPRESS ***/
 function whplPostAdmin (result, textStatus, jqXHR) {
-    wpAjax('POST', ajax_object.ajaxUrl, whplRedirectUrl, errorHandler, data);
+    wpAjax('POST', ajax_object.ajaxUrl, whplRedirectUrl, whplErrorHandler, data);
 
     if (debug == true) {
         console.log("whplPostAdmin successful");
@@ -77,7 +77,7 @@ function whplRedirectUrl (result, textStatus, jqXHR) {
 }
 
 /*** FUNCTION: WORDPRESS AJAX CALL ***/
-function wpAjax (requestType, ajaxUrl, successHandler, errorHandler, data)
+function wpAjax (requestType, ajaxUrl, whplSuccessHandler, whplErrorHandler, data)
 {
     jQuery.ajax({
         type: requestType,
@@ -88,8 +88,8 @@ function wpAjax (requestType, ajaxUrl, successHandler, errorHandler, data)
             if (debug == true)
                 console.log("action: " + data.action);
         },
-        success: successHandler,
-        error: errorHandler
+        success: whplSuccessHandler,
+        error: whplErrorHandler
         // function(response){
         //     alert('The server responded: ' + response);
         // }
@@ -97,7 +97,7 @@ function wpAjax (requestType, ajaxUrl, successHandler, errorHandler, data)
 }
 
 /*** FUNCTION: WHEEPL AJAX CALL ***/
-function whplAjax (requestType, endPoint, successHandler, errorHandler, data)
+function whplAjax (requestType, endPoint, whplSuccessHandler, whplErrorHandler, data)
 {
     jQuery.ajax({
         type: requestType,
@@ -112,8 +112,8 @@ function whplAjax (requestType, endPoint, successHandler, errorHandler, data)
             if (debug == true)
                 console.log("calling " + endPoint + "...");
         },
-        success: successHandler,
-        error: errorHandler
+        success: whplSuccessHandler,
+        error: whplErrorHandler
     });
 }
 
