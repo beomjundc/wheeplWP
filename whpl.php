@@ -1,10 +1,10 @@
 <?php
 
 	/*
-	Plugin Name: wheepl widget
+	Plugin Name: wheepl Widget
 	Plugin URI: https://wheepl.com
 	Author: wheepl
-	Description: widget for live conversations across blogs through hashtags.
+	Description: Widget for live conversations across blogs through hashtags.
 	Version: 1.0.2
 	Author URI: https://wheepl.com
 	*/
