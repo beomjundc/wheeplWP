@@ -103,9 +103,9 @@ function whplAjax (requestType, endPoint, whplSuccessHandler, whplErrorHandler, 
         type: requestType,
         url: apiUrl + endPoint,
         contentType: "application/json; charset=utf-8",
-        headers: {
-            "Authorization": "Basic " + btoa(ajaxUser + ":" + ajaxPass)
-        },
+        // headers: {
+        //     "Authorization": "Basic " + btoa(ajaxUser + ":" + ajaxPass)
+        // },
         data: JSON.stringify(data),
         cache: false,
         beforeSend: function(result) {
