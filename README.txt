@@ -30,6 +30,7 @@ For any questions, please contact: support@wheepl.com
 == Changelog ==
 
 = 1.0.2 =
+* Sanitization and validation of post data being inserted into wp db
 * Reverted to send full url on blog admin initialization
 
 = 1.0.1 =
