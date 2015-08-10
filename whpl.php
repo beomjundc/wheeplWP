@@ -30,7 +30,7 @@
 // variable declarations
 define('wheepl_version', '1.0.2');
 
-if (get_option('whpl_siteRef')) {
+if (get_option('whpl_admin') && get_option('whpl_siteRef')) {
 	// add wheepl widget where the comments should be
 	function whpl_widget () {
 		return plugin_dir_path(__FILE__) . '/whpl-widget.php';
@@ -68,7 +68,7 @@ if (get_option('whpl_siteRef')) {
 }
 
 // add wheepl options page to admin management
-if (true == is_admin() && get_option('whpl_siteRef')) {
+if (true == is_admin() && get_option('whpl_admin') && get_option('whpl_siteRef')) {
 	function whpl_admin_options () {
 		include('whpl-options.php');
 	}
@@ -111,17 +111,21 @@ else {
 	function whpl_post_admin_callback () {
 		update_option('whpl_ver', strtolower(wheepl_version));
 
-		$username = $_POST['username'];
-		update_option('whpl_admin', strtolower($username));
+		$username = sanitize_text_field($_POST['username']);
 
-		$siteRef = $_POST['siteRef'];
-		update_option('whpl_siteRef', strtolower($siteRef));
+		if ( preg_match("/^[a-zA-Z0-9_]{1,15}$/", $username) ) // regex validation on username
+			update_option('whpl_admin', $username);
+
+		$siteRef = sanitize_text_field($_POST['siteRef']);
+
+		if ( preg_match("/^[a-z0-9]{1,50}$/", $siteRef) ) // regex validation on siteRef
+			update_option('whpl_siteRef', strtolower($siteRef));
 
 		// wp_die();
 		exit();
 	}
 
-	add_action('wp_ajax_whpl_post_admin', 'whpl_post_admin_callback'); // Call when user logged in
+	add_action('wp_ajax_whpl_post_admin', 'whpl_post_admin_callback'); // call when user logged in
 	add_action('wp_ajax_nopriv_whpl_post_admin', 'whpl_post_admin_callback');
 }
 
