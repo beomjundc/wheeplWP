@@ -1,15 +1,15 @@
-=== wheepl widget ===
+=== wheepl Widget ===
 Created By: wheepl
 Contact: info@wheepl.com
 Contributors: wheepl
-Tags: conversations, live, messages, social integration
+Tags: comments, hashtags, conversations, live, messages, social integration, profiles
 Requires at least: 3.0.1
 Tested up to: 4.2
 Stable tag: trunk
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
-wheepl widget enables blogs to have a live, united conversation through hashtags.
+wheepl widget enables blogs to have a live, unified conversation through hashtags.
 
 == Description ==
 
@@ -23,13 +23,12 @@ A chat/message like interface promotes real-time conversation.
 
 == Installation ==
 
-Visit: https://whee.pl/lab/installing-wheepl-on-your-wordpress-site/
-
-For any questions, please contact: support@wheepl.com
+Visit: https://whee.pl/lab/installing-wheepl-on-your-wordpress-site/ for installation instructions.
 
 == Changelog ==
 
 = 1.0.2 =
+* Removal of basic auth credentials on api calls
 * Sanitization and validation of post data being inserted into wp db
 * Reverted to send full url on blog admin initialization
 
@@ -39,3 +38,9 @@ For any questions, please contact: support@wheepl.com
 
 = 1.0.0 =
 * Initial release
+
+== Support ==
+
+* Visit https://wheepl.com/faqs for FAQs.
+
+* Contact support@wheepl.com for direct support from our team.
