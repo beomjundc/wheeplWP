@@ -13,9 +13,7 @@ wheepl widget enables blogs to have a live, unified conversation through hashtag
 
 == Description ==
 
-Conversations, communities, people, interests, issues, networks all exist in isolation in our social web. We see a web not of social networks, websites and blogs but one of unity.
-
-#OneLiveWeb
+Conversations, communities, people, interests, issues, networks all exist in isolation in our social web. We see a web not of social networks, websites and blogs but one of unity. #OneLiveWeb
 
 wheepl widget is a cross-page live social commenting system. The widget integrates conversation across webpages based on hashtags chosen by the widget host.
 
