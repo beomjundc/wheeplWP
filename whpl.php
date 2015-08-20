@@ -5,7 +5,7 @@
 	Plugin URI: https://whee.pl
 	Author: wheepl
 	Description: Widget for live conversations across blogs through hashtags.
-	Version: 1.0.2
+	Version: 1.0.3
 	Author URI: https://wheepl.com
 	*/
 
@@ -28,7 +28,7 @@
 	*/
 
 // variable declarations
-define('wheepl_version', '1.0.2');
+define('wheepl_version', '1.0.3');
 
 if (get_option('whpl_admin') && get_option('whpl_siteRef')) {
 	// add wheepl widget where the comments should be
@@ -78,6 +78,8 @@ if (true == is_admin() && get_option('whpl_admin') && get_option('whpl_siteRef')
 	}
 
 	add_action('admin_menu', 'whpl_admin_actions');
+
+	update_option('whpl_ver', strtolower(wheepl_version));
 }
 else {
 	function whpl_admin_form () {
