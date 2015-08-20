@@ -1,4 +1,4 @@
-=== wheepl Widget ===
+=== wheepl widget ===
 Created By: wheepl
 Contact: info@wheepl.com
 Contributors: wheepl
@@ -9,15 +9,17 @@ Stable tag: trunk
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
-wheepl widget enables blogs to have a live, unified conversation through hashtags.
+Wheepl widget enables blogs to have a live, unified conversation through hashtags.
 
 == Description ==
 
 Conversations, communities, people, interests, issues, networks all exist in isolation in our social web. We see a web not of social networks, websites and blogs but one of unity. #OneLiveWeb
 
-wheepl widget is a cross-page live social commenting system. The widget integrates conversation across webpages based on hashtags chosen by the widget host.
+Wheepl widget is a cross-page live social commenting system. The widget integrates conversation across webpages based on hashtags chosen by the widget host.
 
 A chat/message like interface promotes real-time conversation.
+
+Wheepl curious? Visit us at https://whee.pl to learn more.
 
 == Installation ==
 
