@@ -27,6 +27,9 @@ Visit: https://whee.pl/lab/installing-wheepl-on-your-wordpress-site/ for install
 
 == Changelog ==
 
+= 1.0.3 =
+* Feature where the primary/secondary hashtags can be set on edit post or first two tags are automatically used as the hashtags if not set
+
 = 1.0.2 =
 * Removal of basic auth credentials on api calls
 * Sanitization and validation of post data being inserted into wp db
