@@ -5,7 +5,7 @@
 	Plugin URI: https://whee.pl
 	Author: wheepl
 	Description: Widget for live conversations across blogs through hashtags.
-	Version: 1.0.3
+	Version: 1.0.4
 	Author URI: https://wheepl.com
 	*/
 
@@ -28,7 +28,7 @@
 	*/
 
 // variable declarations
-define('wheepl_version', '1.0.3');
+define('wheepl_version', '1.0.4');
 
 if (get_option('whpl_admin') && get_option('whpl_siteRef')) {
 	// add wheepl widget where the comments should be
@@ -143,14 +143,14 @@ $meta_box = array(
 	'fields' => array(
 		array(
 			'name' => 'Primary Hashtag',
-			'desc' => 'Enter the primary hashtag to tag the post with.',
+			'desc' => 'Enter the primary hashtag to tag the post with (include #).',
 			'id' => $prefix . 'pHashtag',
 			'type' => 'text',
 			'std' => ''
 		),
 		array(
 			'name' => 'Secondary Hashtag',
-			'desc' => 'Enter the secondary hashtag to tag the post with.',
+			'desc' => 'Enter the secondary hashtag to tag the post with (include #).',
 			'id' => $prefix . 'sHashtag',
 			'type' => 'text',
 			'std' => ''
@@ -252,31 +252,75 @@ function whpl_save_hashtags ($post_id) {
 		return $post_id;
 	}
 	
+	// for each hashtag field, validate whether the hashtag is valid or replace them with tags
 	foreach ($meta_box['fields'] as $field) {
 		if (isset($_POST[$field['id']])) {
-			$new = sanitize_text_field($_POST[$field['id']]);
+			$new = sanitize_text_field($_POST[$field['id']]); // each hashtag field
 
-			if (preg_match("/^(?=.{1,50}$)(#|\x{ff03}){1}([0-9_\p{L}]*[_\p{L}][0-9_\p{L}]*)$/u", $new) || $new == '') {
-				// set post meta to flag valid hashtag
-				update_post_meta($post_id, $field['id'] . '_invalid', false);
+			if ($new != '') { // if hashtag field has a value
+				if (preg_match('/^(?=.{1,50}$)(#|\x{ff03}){1}([0-9_\p{L}]*[_\p{L}][0-9_\p{L}]*)$/u', $new)) {
+					// set post meta to flag valid hashtag
+					update_post_meta($post_id, $field['id'] . '_invalid', false);
+					update_post_meta($post_id, $field['id'], $new);
+				
+					if (!isset($prevent_publish)) {
+						$prevent_publish = false; // allow publish if hashtags are valid
+					}
+				}
+				else {
+					// set post meta to flag invalid hashtag
+					update_post_meta($post_id, $field['id'] . '_invalid', true);
+					update_post_meta($post_id, $field['id'], $new);
 
-				update_post_meta($post_id, $field['id'], $new);
-
-				if (!isset($prevent_publish)) {
-					$prevent_publish = false;
+					$prevent_publish = true; // input is invalid so prevent publish
 				}
 			}
-			else {
-				// set post meta to flag invalid hashtag
-				update_post_meta($post_id, $field['id'] . '_invalid', true);
+			else if ($new == '') { // if hashtag field has no value
+				global $prefix;
 
-				update_post_meta($post_id, $field['id'], $new);
+				$posttags = $_POST['tax_input']['post_tag'];
 
-				$prevent_publish = true; // input is invalid so prevent publish
+				// process primary tag
+				if (is_int($posttags[0])) {
+					$ptag_obj = get_term_by('id', $posttags[0], 'post_tag');
+					$ptag = $ptag_obj ? '#' . preg_replace('/\s+/', '', $ptag_obj->name) : '';
+				}
+				else {
+					$ptag = $posttags[0] ? '#' . preg_replace('/\s+/', '', $posttags[0]) : '';
+				}
+
+				// process secondary tag
+				if (is_int($posttags[1])) {
+					$stag_obj = get_term_by('id', $posttags[1], 'post_tag');
+					$stag = $stag_obj ? '#' . preg_replace('/\s+/', '', $stag_obj->name) : '';
+				}
+				else {
+					$stag = $posttags[1] ? '#' . preg_replace('/\s+/', '', $posttags[1]) : '';
+				}
+
+				if ($field['id'] == $prefix . 'pHashtag') {
+					if (preg_match('/^(?=.{1,50}$)(#|\x{ff03}){1}([0-9_\p{L}]*[_\p{L}][0-9_\p{L}]*)$/u', $ptag)) {
+						// update pHashtag value with the first tag if exists
+						update_post_meta($post_id, $field['id'] . '_invalid', false);
+						update_post_meta($post_id, $field['id'], $ptag);
+					}
+				}
+				elseif ($field['id'] == $prefix . 'sHashtag') {
+					if (preg_match('/^(?=.{1,50}$)(#|\x{ff03}){1}([0-9_\p{L}]*[_\p{L}][0-9_\p{L}]*)$/u', $stag)) {
+						// update sHashtag value with the second tag if exists
+						update_post_meta($post_id, $field['id'] . '_invalid', false);
+						update_post_meta($post_id, $field['id'], $stag);
+					}
+				}
+
+				if (!isset($prevent_publish)) {
+					$prevent_publish = false; // allow publish if hashtags are valid
+				}
 			}
 		}
 	}
 
+	// based on $prevent_publish flag, determine whether to allow publish or not
 	if (isset($prevent_publish)) {
 		if ($prevent_publish) {
 			// unhook this function to prevent indefinite loop
@@ -289,7 +333,14 @@ function whpl_save_hashtags ($post_id) {
 			add_action('save_post', 'whpl_save_hashtags');
 		}
 		else {
-			update_post_meta($post_id, 'whpl_published', true);
+			$status = get_post_status( $post_id );
+
+			if ($status == 'publish') {
+				update_post_meta($post_id, 'whpl_published', true);
+			}
+			else {
+				update_post_meta($post_id, 'whpl_published', false);
+			}
 		}
 	}
 }
