@@ -24,8 +24,8 @@
              + "?site_ref=" + siteRef
              + '&parent_domain=' + window.location.protocol + '//' + window.location.host
              + "&parent_path=" + window.location.pathname
-             + "&phashtag=" + encodeURIComponent(wpPHashtag)
-             + "&shashtag=" + encodeURIComponent(wpSHashtag);
+             + "&phashtag=" + encodeURIComponent(whplPHashtag)
+             + "&shashtag=" + encodeURIComponent(whplSHashtag);
 
     /* WIDGET EMBED */
     (function () {
