@@ -9,7 +9,7 @@ jQuery(document).ready(function($) {
 
     whplAjax('GET', 'addAnon', whplSaveAnonToken, whplErrorHandler);
 
-    // ON CLICK: login user for admin management
+    // ON CLICK: register blog for admin user
     $('#adminSubmit').click(function () {
         var formData = {},
             parameters = {"action":"whpl_post_admin",

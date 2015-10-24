@@ -10,23 +10,22 @@
     add_action('admin_enqueue_scripts', 'whpl_conf');
 
     // pick up primary and secondary hashtags from wp db
-    $wpPHashtag = get_post_meta($post->ID, 'whpl_pHashtag', true);
-    $wpSHashtag = get_post_meta($post->ID, 'whpl_sHashtag', true);
+    $whplPHashtag = get_post_meta($post->ID, 'whpl_pHashtag', true);
+    $whplSHashtag = get_post_meta($post->ID, 'whpl_sHashtag', true);
 ?>
 
-<script type="text/javascript">
+<script type="text/javascript"> 
 
     var siteRef = "<?php echo get_option('whpl_siteRef') ?>",
-        wpPHashtag = "<?php echo $wpPHashtag; ?>",
-        wpSHashtag = "<?php echo $wpSHashtag; ?>";
+        whplPHashtag = "<?php echo $whplPHashtag; ?>",
+        whplSHashtag = "<?php echo $whplSHashtag; ?>";
 
     var iframeSrc = whplConf.widgetSrc
              + "?site_ref=" + siteRef
-             + "&parent_protocol=" + window.location.protocol + "//"
-             + "&parent_host=" + window.location.host
+             + '&parent_domain=' + window.location.protocol + '//' + window.location.host
              + "&parent_path=" + window.location.pathname
-             + "&wp_phashtag=" + encodeURIComponent(wpPHashtag)
-             + "&wp_shashtag=" + encodeURIComponent(wpSHashtag);
+             + "&phashtag=" + encodeURIComponent(wpPHashtag)
+             + "&shashtag=" + encodeURIComponent(wpSHashtag);
 
     /* WIDGET EMBED */
     (function () {

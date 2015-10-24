@@ -1,5 +1,5 @@
 <div class="wrap">
-    <?php echo "<h2>" . __( 'WHEEPL ADMIN REGISTRATION' ) . "</h2>"; ?>
+    <?php echo "<h2>" . __( 'REGISTER YOUR BLOG' ) . "</h2>"; ?>
 
     <form id="adminLoginForm" name="admin_init_form" method="post" action="<?php echo str_replace( '%7E', '~', $_SERVER['REQUEST_URI']); ?>">
         <?php echo "<h4>" . __( 'admin user login' ) . "</h4>"; ?>
